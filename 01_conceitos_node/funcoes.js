@@ -11,6 +11,7 @@ exports.multiplicar = function(x, y) {
     return x * y;
 };
 
+// Nome dos participantes do curso
 exports.alunos = [
     {
         nome: 'Natália Gomes',
