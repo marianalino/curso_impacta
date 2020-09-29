@@ -1,0 +1,47 @@
+1. Software
+	- MongoDB (mongodb.com)
+	- Visual Studio Code (VSCode - code.visualstudio.com)
+	- Nodejs (nodejs.org/en/)
+	- Git Bash (git-scm.com/download)
+	
+2. Criar pasta 'curso_impacta'
+
+3. Criar outra pasta interna da aula 01 '01_conceitos_node'
+
+
+*****
+
+Tipos de variáveis no JS
+
+var n = 10;                                         // inteiro ou number
+var s = "Minha primeira aula";                      // string
+var ns = "10";                                      // string
+var a = [1, "2", 3];                                // array ou lista
+var o = { dia: '28/09', ano: '2020, hora: '22h33' } // objeto
+var f1 = calcularSoma(2, 3)                         // inteiro ou number
+var f2 = calcularSoma                               // função
+
+
+*****
+
+COMANDO PROMP DE COMANDO / GIT BASH
+
+GIT BASH:
+
+cd ~/Desktop/
+
+Verificar versão do node
+
+$ node -v
+
+Verificar arquivos da pasta:
+
+$ ls
+
+Rodar aplicação Node.js
+
+$ node app01
+
+Caminho completo pasta (não funciona no prompt, só no Git Bash)
+
+$ pwd
