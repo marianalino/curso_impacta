@@ -1,0 +1,54 @@
+Criando servidor web com Node
+
+- Criar uma pasta nova 02_node_web
+- Criar um arquivo dentro da pasta com nome app_server.js
+
+Função createServer do módulo http recebe uma função de callback que por sua vez tem 2 parametros
+
+readFile tem 2 parametros:
+    1 - o arquivo a ser lido
+    2 - é uma função callback que será executada de acordo com o que faremos com o arquivo - é opcional
+    No caso de usar a função callback que é opcional, ela precisará ter 2 parametros:
+        1 - possível erro
+        2 - conteúdo da página
+    O fs lê o arquivo e armazena e o parametro da função callback pega o conteúdo e exibe
+
+Request é um nome padrão utilizado para enviar ao servidor/captar a resposta do 'cliente' (navegador) as informações necessárias. Por exemplo: um formulário de contato que envia dados do usuário.
+Response que é a resposta dp servidor referente ao "conteudo" enviado via request
+
+Para rodar o server, basta (estando na pasta correta) executar o comando:
+$ node app_server
+
+Esse comando executará o console.log com a mensagem e para visualizar a página, será necessário abrir o navegador:
+http://localhost:3000
+
+Módulos como vimos:
+1. Criados por nós: para ser usado colocamos referência ao caminho do arquivo - exemplo: "./nomeDoModulo"
+    exports.nomeVariavel (quando exportamos de forma individual)
+    module.exports (quando exportamos um objeto de uma unica vez)
+2. Node: para ser usado colocamos o nome direto da Biblioteca/Módulo - exemplo: "nomeDoModulo"
+    Definidos pela própra Biblioteca
+3. Módulos de terceiros: para ser usado em Projetos Node.js
+    Projetos Node.JS PRECISAM ter pelos 2 duas coisas em sua estrutura para existir:
+    - package.json
+    - node_modules
+
+Tipos de objetos:
+- Javascript
+{
+    nome: "valor",
+    idade: 10
+}
+
+- JSON (JavaScript Object Notation)
+{
+    "nome": "valor",
+    "idade": 10
+}
+
+Projeto Node.JS
+- O arquivo package.json têm como sua estrutura uma propriedade chamada "dependencies" que é aonde ficam os módulos de terceiros utilizados no Projeto
+
+Comando node - usamos para executar arquivos .js para rodar scripts Javascript
+Comando npm - usamos para lidar com Projetos Node (Node.js, Angular, React, Vue)
+npm: node package manager

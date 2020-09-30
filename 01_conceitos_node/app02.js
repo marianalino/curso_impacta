@@ -28,3 +28,22 @@ for (let index = 0; index < lista.length; index++) {
     console.log('Nome: ' + lista[index].nome);
     console.log('Ocupação: ' + lista[index].ocupacao);
 }
+
+console.log('------------');
+console.log('Usando a função para verificar tamanho de uma string');
+console.log('Caracteres: ' + funcoes.verificarTamanho('Impacta'));
+
+console.log('------------');
+console.log('Usando a função para verificar tamanho de um number/inteiro');
+console.log('Número: ' + funcoes.verificarTamanho(10));
+
+const numeros = [1, 2, 3, "4", "5"];
+console.log('------------');
+console.log('Usando a função para verificar tamanho de um lista/array');
+console.log('Lista: ' + funcoes.verificarTamanho(numeros));
+
+console.log('------------');
+let resposta = funcoes.executar(function(texto) {
+    return texto.length;
+});
+console.log(resposta);

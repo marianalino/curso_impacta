@@ -34,3 +34,38 @@ exports.alunos = [
         ocupacao: 'Instrutora'
     }
 ];
+
+exports.executar = function(operacao) {
+    return operacao('Impacta');
+};
+
+exports.verificarTamanho = function(x) {
+    return x.length;
+};
+
+exports.verificarTamanho2 = x => x.length;
+exports.verificarTamanho3 = (x) => x.length;
+
+exports.multiplicarNormal = function(x, y) {
+    return x * y;
+};
+
+exports.multiplicarAF = (x, y) => x * y;
+
+exports.fn = function() {
+    console.log('Teste Arrow Function sem parametro');
+};
+
+exports.fn = () => console.log('Teste Arrow Function sem parametro');
+
+exports.fn2 = function(texto) {
+    let novoTexto = texto + "!!";
+    console.log(novoTexto);
+    return novoTexto;
+};
+
+exports.fn2 = (texto) => {
+    let novoTexto = texto + "!!";
+    console.log(novoTexto);
+    return novoTexto;
+};
