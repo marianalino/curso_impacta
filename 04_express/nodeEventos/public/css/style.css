@@ -2,14 +2,91 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Piazzolla", serif;
 }
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
 }
-h1 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Sansita Swashed", cursive;
   text-align: center;
 }
+
 a {
   color: #00b7ff;
+}
+
+.formulario {
+  margin: 40px auto;
+  width: 400px;
+}
+
+.formulario fieldset {
+  border: 1px solid rgb(138 43 226 / 53%);
+  padding: 30px 50px 40px;
+  border-radius: 11px;
+}
+
+.formulario fieldset legend {
+  padding: 0 10px;
+  text-align: center;
+  font-size: 18px;
+  color: #5f0bad;
+}
+
+.formulario fieldset div {
+  margin-bottom: 10px;
+}
+
+.formulario fieldset div:last-of-type {
+  margin-bottom: 0;
+}
+
+.formulario fieldset div label {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.formulario fieldset div input {
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid gray;
+  border-radius: 4px;
+}
+
+.formulario fieldset div input:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #5f0bad;
+}
+
+.formulario fieldset div button {
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  margin-top: 20px;
+  border: none;
+  background-color: #8a2be2;
+  color: white;
+  cursor: pointer;
+}
+
+.formulario fieldset div button:hover {
+  background-color: #5f0bad;
+}
+
+.formulario fieldset div button:focus,
+.formulario fieldset div button:active {
+  box-shadow: none;
+  outline: none;
 }
