@@ -1,0 +1,160 @@
+Módulos como vimos:
+1. Criados por nós: para ser usado colocamos referência ao caminho do arquivo - exemplo: "./nomeDoModulo"
+    exports.nomeVariavel (quando exportamos de forma individual)
+    module.exports (quando exportamos um objeto de uma unica vez)
+2. Node: para ser usado colocamos o nome direto da Biblioteca/Módulo - exemplo: "nomeDoModulo"
+    Definidos pela própra Biblioteca
+3. Módulos de terceiros: para ser usado em Projetos Node.js
+    Projetos Node.JS PRECISAM ter pelos 2 duas coisas em sua estrutura para existir:
+    - package.json
+    - node_modules
+
+Tipos de objetos:
+- Javascript
+{
+    nome: "valor",
+    idade: 10
+}
+
+- JSON (JavaScript Object Notation) - igual no package.json
+{
+    "nome": "valor",
+    "idade": 10
+}
+
+Projeto Node.JS
+- O arquivo package.json têm como sua estrutura uma propriedade chamada "dependencies" que é aonde ficam os módulos de terceiros utilizados no Projeto
+
+Comando node - usamos para executar arquivos .js para rodar scripts Javascript
+Comando npm - usamos para lidar com Projetos Node (Node.js, Angular, React, Vue)
+npm: node package manager
+
+Para inicializar um projeto Node, usamos o Comando
+
+$ npm init
+
+Será exibido no terminal algumas perguntas para respondermos para a criação desse arquivo:
+1. Nome do projeto - não usar espaços
+2. Versão do projeto - pode dar enter e manter a versão sugerida de 1.0.0
+    Curiosidade: MAJOR.MINOR.PATCH (https://semver.org/lang/pt-BR/)
+        versão Maior(MAJOR): quando fizer mudanças incompatíveis na API
+        versão Menor(MINOR): quando adicionar funcionalidades mantendo compatibilidade
+        versão de Correção(PATCH): quando corrigir falhas mantendo compatibilidade.
+3. Descrição - é opcional, não precisa ser colocada
+4. Ponto de partida - arquivo inicial lido para execução
+5. Teste - caso seja utilizado teste unitário
+6. GIT Repository - caso seja utilizado um repositório de versionamento GIT
+7. Keywords - palavras chave da aplicação
+8. Autor - Nome de quem está criando a aplicação
+9. Licença - mantem a padrão de ISC
+
+Formas de instalar um projeto:
+1. Quando pegamos um projeto base e baixamos na nossa máquina:
+
+$ npm install
+OU
+$ npm i
+
+2. Quando vamos instalar um módulo de terceiro no projeto:
+
+$ npm install <nome_modulo>
+OU
+$ npm i <nome_modulo>
+
+3. Quando vamos instalar um módulo de terceiro e queremos salvar o módulo no package
+
+$ npm install <nome_modulo> --save
+OU
+$ npm i <node_modules> --save
+
+4. Quando vamos instalar um módulo de terceiro porém é para ser executado em ambiente de desenvolvimento
+
+$ npm install <nome_modulo> --save-dev
+OU
+$ npm i <node_modules> --save-dev
+
+5 . Quando vamos instalar um módulo de criação de projeto - usamos a foram GLOBAL
+
+$ npm install <nome_modulo> -g
+OU
+$ npm i <nome_modulo> -g
+
+Curiosidade do GIT:
+    O GIT tem um arquivo chamado .gitignore que trata os arquivos que devem ser ignorados para versionamento, mantendo esses arquivos fora do envio para o GIT no servidor.
+    Exemplo de arquivos ignorados: pasta node_modules, arquivos minificados...
+
+    Os arquivos que devem ser mantidos para envio pro GIT no servidor são os arquivos imprescindiveis, sendo somente os que são realmente necessários para execução da aplicação.
+    Exemplo de arquivos mantidos: arquivos HTML, JS/TS, CSS/SASS...
+
+Plugin para formatar datas em JavaScript: Moment
+
+------------
+
+Criando uma aplicação e rodando o moment
+
+1. Criar pasta 03_projeto_node
+
+2. Rodar comando para inicialização de projeto NPM
+
+$ npm init
+
+3. Rodar comando para instalar módulo/plugin/biblioteca do moment
+
+$ npm i moment --save
+
+4. Criar arquivo app.js dentro da pasta 03_projeto_node
+
+5. Colocar o require para utilizar o moment
+
+Documentação: momentjs.com
+
+Para deixar em português: moment.locale('pt-BR')
+
+-------------
+
+Criando uma aplicação Express
+
+1. Criar pasta 04_express
+
+2. Instalar o Express
+
+$ npm install express-generator -g
+
+3. Iniciar um projeto Express
+
+$ express nodeEventos --ejs
+
+Express é um framework MVC ( Model - View - Controller)
+
+.ejs - Embbeded JavaScript
+
+View: são páginas que o usuário visualiza. Porém nessa estrutura não acionamos a página por seu caminho, a estrutura MVC faz uma requisição pelo browser para uma função (controller) para carregamento de uma view para o usuário no browser. O arquivo .ejs utilizado para o projeto, permitirá uma interação do HTML com o JavaScript, por exemplo possibilitando fazer uma chamada para o banco de dados.
+
+Controller: é o responsável por intermediar as requisições e também as informações que vem do banco de dados e que apresentadas para o usuário numa camada de visualização, ou o contrário - enviar dados de uma camada de visualização para o model. Ele funciona como um distribuidor de informações/requisições.
+
+Curiosidade de comando npm:
+    Em casos de plugins/módulos/bibliotecas que esteja depreciadas (desatualizadas), é comum o uso do comando para ATUALIZAR a(s) biblioteca(s).
+
+    $ npm update
+    OU
+    $ npm update <nome_modulo>
+
+4. Comando para entrar na pasta
+
+$ cd nodeEventos
+
+5. Instalação da aplicação
+
+$ npm install
+
+6. Instalar módulo para ligar as pastas de MVC
+
+$ npm install express-load --save
+
+7. Instalar módulo para reload automático
+
+$ npm install nodemon -g
+
+8. Instalar módulo para armazenar sessão - para salvarmos infos do usuário e mantermos a sessão
+
+$ npm i express-session --save

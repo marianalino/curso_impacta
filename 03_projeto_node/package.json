@@ -1,0 +1,15 @@
+{
+  "name": "projeto_node",
+  "version": "1.0.0",
+  "description": "Meu primeiro projeto Node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mariana Lino",
+  "license": "ISC",
+  "dependencies": {
+    "font-awesome": "^4.7.0",
+    "moment": "^2.29.0"
+  }
+}
