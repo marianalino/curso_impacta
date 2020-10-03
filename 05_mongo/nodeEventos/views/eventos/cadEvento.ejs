@@ -17,6 +17,14 @@
         >
         <link
             rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        >
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        />
+        <link
+            rel="stylesheet"
             href="/css/style.css"
         />
         <title>Cadastro de Evento</title>
@@ -25,19 +33,22 @@
     <body>
         <section class="page">
             <header>
+                <a
+                    class="back"
+                    href="/menu"
+                ><i class="fas fa-angle-left"></i> Voltar</a>
                 <h1>Cadastro de Eventos</h1>
                 <p>Seja bem vindo, <strong> <%= usuarioParams.nome %> </strong></p>
                 <nav>
-                    <a href="/logout">Sair</a>
+                    <a
+                        class="logout"
+                        href="/logout"
+                    >Sair <i class="fas fa-sign-out-alt"></i></a>
                 </nav>
             </header>
 
             <main>
-                <h2>Cadastro de Evento</h2>
-                <a
-                    class="back"
-                    href="/menu"
-                >Voltar</a>
+                <h2 class="align-left">Cadastro de Evento</h2>
                 <form
                     action="/novoEvento"
                     method="POST"
@@ -49,7 +60,7 @@
                             type="text"
                             id="descricao"
                             name="evento[descricao]"
-                            autocomplete="new-password"
+                            autocomplete="off"
                         />
                     </div>
                     <div>
@@ -67,7 +78,7 @@
                             type="text"
                             id="preco"
                             name="evento[preco]"
-                            autocomplete="new-password"
+                            autocomplete="off"
                         />
                     </div>
 

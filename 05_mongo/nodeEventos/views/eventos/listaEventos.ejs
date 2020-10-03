@@ -21,6 +21,10 @@
         >
         <link
             rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        />
+        <link
+            rel="stylesheet"
             href="/css/style.css"
         />
         <title>Lista de Eventos</title>
@@ -29,25 +33,27 @@
     <body>
         <section class="page">
             <header>
+                <a
+                    class="back"
+                    href="/menu"
+                ><i class="fas fa-angle-left"></i> Voltar</a>
                 <h1>Cadastro de Eventos</h1>
                 <p>Seja bem vindo, <strong> <%= usuarioParams.nome %> </strong></p>
                 <nav>
-                    <a href="/logout">Sair</a>
+                    <a
+                        class="logout"
+                        href="/logout"
+                    >Sair <i class="fas fa-sign-out-alt"></i></a>
                 </nav>
             </header>
 
             <main>
-                <h2>Lista de Eventos</h2>
-                <a
-                    class="back"
-                    href="/menu"
-                >Voltar</a>
+                <h2 class="align-left">Lista de Eventos</h2>
 
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Descrição</th>
-                            <th>Data Formatada</th>
                             <th>Data</th>
                             <th>Preço</th>
                         </tr>
@@ -55,7 +61,6 @@
                     <tbody>
                         <tr>
                             <td>Teste</td>
-                            <td>xx/xx/xxxx</td>
                             <td>xx/xx/xxxx</td>
                             <td>xx</td>
                         </tr>
@@ -66,9 +71,6 @@
                             </td>
                             <td>
                                 <%= momentParams(evento.data).format("DD/MM/yyy") %>
-                            </td>
-                            <td>
-                                <%= evento.data %>
                             </td>
                             <td>
                                 <%= evento.preco %>

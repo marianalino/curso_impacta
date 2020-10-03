@@ -17,6 +17,14 @@
         >
         <link
             rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        >
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        />
+        <link
+            rel="stylesheet"
             href="/css/style.css"
         />
         <title>Menu Eventos</title>
@@ -25,24 +33,37 @@
     <body>
         <section class="page">
             <header>
+                <a
+                    class="back-blanck"
+                    href="#"
+                >&nbsp;</a>
                 <h1>Cadastro de Eventos</h1>
                 <p>Seja bem vindo, <strong> <%= usuarioParams.nome %> </strong></p>
                 <nav>
-                    <a href="/logout">Sair</a>
+                    <a
+                        class="logout"
+                        href="/logout"
+                    >Sair <i class="fas fa-sign-out-alt"></i></a>
                 </nav>
             </header>
 
             <main>
-                <nav>
+                <nav id="menu">
                     <ul>
                         <li>
-                            <a href="/cadUsuario">Cadastro de Usuários</a>
+                            <a href="/cadUsuario">
+                                <i class="fas fa-angle-right"></i> Cadastro de Usuários
+                            </a>
                         </li>
                         <li>
-                            <a href="/cadEvento">Cadastro de Eventos</a>
+                            <a href="/cadEvento">
+                                <i class="fas fa-angle-right"></i> Cadastro de Eventos
+                            </a>
                         </li>
                         <li>
-                            <a href="/listaEventos">Lista de Eventos</a>
+                            <a href="/listaEventos">
+                                <i class="fas fa-angle-right"></i> Lista de Eventos
+                            </a>
                         </li>
                     </ul>
                 </nav>
