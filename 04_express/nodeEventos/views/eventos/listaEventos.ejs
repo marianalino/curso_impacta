@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        >
+        <link
+            href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap"
+            rel="stylesheet"
+        >
+        <link
+            href="https://fonts.googleapis.com/css2?family=Piazzolla&display=swap"
+            rel="stylesheet"
+        >
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        >
+        <link
+            rel="stylesheet"
+            href="/css/style.css"
+        />
+        <title>Lista de Eventos</title>
+    </head>
+
+    <body>
+        <section class="page">
+            <header>
+                <h1>Cadastro de Eventos</h1>
+                <p>Seja bem vindo, <strong> <%= usuarioParams.nome %> </strong></p>
+                <nav>
+                    <a href="/logout">Sair</a>
+                </nav>
+            </header>
+
+            <main>
+                <h2>Lista de Eventos</h2>
+                <a
+                    class="back"
+                    href="/menu"
+                >Voltar</a>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Data</th>
+                            <th>Preço</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Teste</td>
+                            <td>xx/xx/xxxx</td>
+                            <td>xx</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </main>
+        </section>
+    </body>
+
+</html>

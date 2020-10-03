@@ -4,6 +4,21 @@ var express = require('express');
 // Instância do express para uso no projeto para configuração e execução do express
 app = express();
 
+var mongoose = require('mongoose');
+global.db = mongoose.connect('mongodb://localhost:27017/eventos_aula');
+
+mongoose.connection.on('connected', function() {
+  console.log('*** Conexão estabelecida ***');
+});
+
+mongoose.connection.on('error', function() {
+  console.log('*** Erro: ' + error + " ***");
+});
+
+mongoose.connection.on('disconnected', function() {
+  console.log('*** Conexão finalizada ***');
+});
+
 // Importação de módulo para ligar pastas MVC
 var load = require('express-load');
 var bodyParser = require('body-parser');

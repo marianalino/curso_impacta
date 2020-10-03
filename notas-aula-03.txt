@@ -158,3 +158,104 @@ $ npm install nodemon -g
 8. Instalar módulo para armazenar sessão - para salvarmos infos do usuário e mantermos a sessão
 
 $ npm i express-session --save
+
+*********************
+
+AULA 04
+
+1. Instalação do cookie-parser (já vem instalado) - para armazena e disponibilia para leitura
+
+$ npm i cookie-parser --save
+
+2. Instalação do body-parser - pega informações de formulário e na tela
+
+$ npm i body-parser --save
+
+Necessário adicionar os 3 módulos acima na ordem de COOKIE, SESSION e BODY para COOKIE estar disponivel para SESSION pegar.
+
+Para pegar dados do formulário usaremos o 'request.body.usuario.nome' na tela de Login, aonde:
+- request é responsavel pelo trigger da requisição
+- body é o módulo que pega dados para compartilhar informações
+- usuario é o input aonde colocamos usuario[nome]
+- nome é a propriedade de usuario como demonstrado acima
+
+*** Salvando dados na sessão:
+Para salvar os dados na sessão, usaremos o request.session.nomeDaSessao e atribuiremos a essa sessão o objeto com valor para serem armazenado. Exemplo:
+
+var user = request.body.usuario;
+request.session.sessaoUsuario = user;
+
+*** Response - Render e Redirect
+- Render: renderiza uma view na chamada da action, fazendo da tela disponível e exibida ao usuário no browser
+- Redirect: usado no meio de uma transação de telas aonde uma ação pode ser tomada, por exemplo no Login aonde os dados são enviados pelo formulário, são tratados para verificação dos campos terem sido digitados corretamente e então ter uma ação/um local para ir. O Redirect é usado para o trigger do browser, como se a URL tivesse sido digitada diretamente, e então aciona uma action que abre uma View por meio de Renderização
+
+*** Passando dados como parâmetro para uma tela
+Para utilizar dados, por exemplo, da sessão na tela, utilizamos a estrutura de um objeto para enviar no comando de response.render esse objeto. Exemplo:
+
+// salvando dados do usuario
+var usuario = request.session.sessaoUsuario;
+// criando objeto para ser enviado como parametro para Renderização
+var params = { paramsUsuario: usuario };
+// enviando parametros
+response.render('view/arquivo', params);
+
+Para utilizar esse dado na tela
+<%= paramsUsuario.nome %>
+aonde paramsUsuario é o objeto enviado e o .nome é o atributo que se encontra na session salva aonde tem os dados do usuario
+
+*** Destruindo uma sessão
+Para destruir uma sessão utilizamos o comando: request.session.destroy() e então fazemos um redirect para outra tela
+
+*** Validando sessão
+Para validar uma sessão, criamos um módulo exportado aonde utilizamos o método de next que possibilita seguir no comando. Exemplo:
+module.exports = function(request, response, next) {
+    if (!request.session.usuarioSession) { // verificando existencia de sessão de usuário salva
+        return response.redirect('/'); // redirecionando caso o usuário não tenha sessão
+    }
+    return next(); // seguindo o fluxo natural para a rota
+}
+
+Essa validação é usada como intermediário na chamada de .get para uma rota. Exemplo:
+app.get('/menu', valida, eventosc.menu);
+// Primeiro comando diz qual é a rota
+// Segundo comando lê o módulo validando o usuário e caso não esteja com uma sessão válida, o usuário é automaticamente redirecionado pelo arquivo de validação. Mas caso seja válido, o comendo next manda seguir para o terceiro parametro
+// Terceiro comando abre a action para renderizar uma view
+
+
+MongoDB
+
+Como rodar em caso de problema de comando não reconhecido
+- Abrir serviços e procurar na lista para ver se está em execução
+- Pegar caminho de instalação do MongoDB: C:\Program Files\MongoDB\Server\4.4\bin
+- Abrir variáveis de ambiente
+- Procurar 'Path' em Variáveis do Sistema
+- Adicionar o Caminho do item 2 acima em novo -> C:\Program Files\MongoDB\Server\4.4\bin
+
+Comandos:
+- Mostrar bancos de dados: show databases
+- Selecionar banco de dados: use 'nomeBancoDeDados'
+- Ver 'tabelas' (collections) do banco selecionado: show collections
+- Ver dados de uma collection ('tabela'): db.nomeDaCollection.find().pretty()
+
+Para fechar a conexão do mongo, basta apertar CTRL + C ou escrever 'exit' e dar enter
+
+Vamos criar a pasta 05_mongo para criar o mesmo projeto com alterações devido ao mongo. Cole a pasta nodeEventos na pasta 05.
+
+Instalar módulo para gerenciar o MongoDB no código
+
+$ npm i mongoose --save
+
+Configuração de conexão de banco de dados:
+global.db = mongoose.connect('mongodb://localhost:27017/nomeBancoDeDados)
+
+mongoose.connection.on('connected', function() {
+  console.log('*** Conexão estabelecida ***');
+});
+
+mongoose.connection.on('error', function() {
+  console.log('*** Erro: ' + error + " ***");
+});
+
+mongoose.connection.on('disconnected', function() {
+  console.log('*** Conexão finalizada ***');
+});

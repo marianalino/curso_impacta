@@ -6,6 +6,8 @@
 // Essa funções (propriedades) também são conhecidas como ACTIONS - a index é uma ACTION
 // Essa action chamaremos no nosso arquivo home de rota e que também será um módulo/função que será exportada
 module.exports = function(app) {
+    var Usuario = app.models.usuarios;
+
     var HomeController = {
         index: function(request, response) {
             response.render('home/inicio');
@@ -16,17 +18,17 @@ module.exports = function(app) {
             var nome = request.body.usuario.nome;
             var senha = request.body.usuario.senha;
 
-            // simulação de login
-            if (nome == 'admin' && senha == 'admin') {
-                // vamos armazenar as infos do usuario
-                var user = request.body.usuario;
+            var query = { 'nome': nome, 'senha': senha };
 
-                // criar a sessão e armazenar as informações do usuário
-                request.session.usuarioSession = user;
-                response.redirect('/menu');
-            } else {
-                response.redirect('/');
-            }
+            Usuario.findOne(query).exec(function(erro, usuario) {
+                if (erro) {
+                    console.log('Erro: ' + erro);
+                    response.redirect('/');
+                } else {
+                    request.session.usuarioSession = usuario;
+                    response.redirect('/menu');
+                }
+            });
         },
         logout: function(request, response) {
             request.session.destroy();
