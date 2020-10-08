@@ -1,0 +1,55 @@
+Vamos criar um ambiente mockado e utilizaremos um módulo para simular esse ambiente: json-server
+
+$ npm i json-server -g
+
+Vamos criar um arquivo de db.json que será nosso mock:
+
+{
+  "produtos": [
+    {
+      "id": 1,
+      "descricao": "Camiseta",
+      "preco": 20
+    },
+    {
+      "id": 2,
+      "descricao": "Mochila",
+      "preco": 200
+    }
+  ]
+}
+
+E com o POSTMAN utilizamos os metodos para CRUD
+Create - POST (método HTTP)
+Read   - GET (método HTTP)
+Update - PUT (método HTTP)
+Delete - DELETE (método HTTP)
+
+Vamos criar um projeto para entender Promise
+
+$ npm init -y (na pasta 06_webservice_mock)
+
+Vamos instalar o modulo node-fetch para simular o fetch do javascript
+
+$ npm i node-fetch --save
+
+*********************
+
+Para usarmos o MongoDB com Express para criarmos nosso webservice, vamos criar uma nova pasta chamda 07_webservice_express
+
+Nessa pasta, criaremos uma estrutura de Express para trabalharmos com a API que iremos criar. Não utilizaremos nem view e nem controller.
+
+Dentro da pasta 07_webservice_express vamos executar o comando:
+
+$ express apiEventos --ejs
+
+Dentro da pasta apiEventos vamos instalar alguns módulos!
+
+Além da estrutura de Express, utilizaremos 3 modulos que já vimos anteriormente:
+- body-parser
+- express-load
+- mongoose
+
+$ npm i body-parser express-load mongoose --save
+
+Vamos criar dentro da pasta apiEventos a pasta models para colocarmos a estrutura do arquivo de eventos feito na aula de MongoDB
