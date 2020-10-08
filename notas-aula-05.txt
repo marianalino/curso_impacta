@@ -53,3 +53,11 @@ Além da estrutura de Express, utilizaremos 3 modulos que já vimos anteriorment
 $ npm i body-parser express-load mongoose --save
 
 Vamos criar dentro da pasta apiEventos a pasta models para colocarmos a estrutura do arquivo de eventos feito na aula de MongoDB
+
+Vamos criar a estrutura com o: express, express-load, body-parser e o mongoose
+
+E criamos o CRUD com:
+app.GET
+app.POST
+app.PUT
+app.DELETE
