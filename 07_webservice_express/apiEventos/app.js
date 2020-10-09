@@ -1,10 +1,20 @@
 var express = require('express');
 var load = require("express-load");
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+
+app.use(function(request, response, next) {
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  // response.header("Access-Control-Allow-Methods", "GET");
+
+  next();
+});
 
 var mongoose = require('mongoose');
 global.db = mongoose.connect('mongodb://localhost:27017/eventos', {

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html
+    lang="en"
+    ng-app="appAngular"
+>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        >
+        <title>Aplicação AngularJS</title>
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+            crossorigin="anonymous"
+        >
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    </head>
+
+    <body ng-controller="Principal as ctl">
+        <section class="container">
+            <h1>Cadastro e Consulta de Eventos</h1>
+
+            <h2>Inclusão de Evento</h2>
+
+            <form
+                name="incluirEvento"
+                ng-submit="ctl.adicionar()"
+            >
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <input
+                        class="form-control"
+                        id="descricao"
+                        type="text"
+                        ng-model="ctl.novoEvento.descricao"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="data">Data</label>
+                    <input
+                        class="form-control"
+                        id="data"
+                        type="date"
+                        ng-model="ctl.novoEvento.data"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="preco">Preço</label>
+                    <input
+                        class="form-control"
+                        id="preco"
+                        type="text"
+                        ng-model="ctl.novoEvento.preco"
+                    >
+                </div>
+                <div class="form-group">
+                    <button
+                        class="btn btn-primary"
+                        type="submit"
+                    >Incluir Evento</button>
+                </div>
+            </form>
+
+            <h2>Lista de Eventos</h2>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Data</th>
+                        <th>Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="evento in ctl.eventos">
+                        <td>{{evento.descricao | uppercase}}</td>
+                        <td>{{evento.data | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{evento.preco | currency: 'R$'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <script>
+            var app = angular.module("appAngular", []);
+
+            app.controller("Principal", ['$http', function($http) {
+                var self = this;
+                self.eventos = []
+                self.novoEvento = {}
+
+                var listarEventos = function() {
+                    return $http.get('http://localhost:3200/eventos').then(
+                        function(success) {
+                            self.eventos = success.data;
+                        }, function(error) {
+                            console.log(error)
+                            alert('Erro aconteceu!')
+                        }
+                    )
+                }
+
+                listarEventos();
+
+                self.adicionar = function() {
+                    $http({
+                        url: 'http://localhost:3200/eventos',
+                        method: 'POST',
+                        data: self.novoEvento,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(
+                        function(succes) {
+                            self.novoEvento = {};
+                        },
+                        function(error) {
+                            console.log(error)
+                            alert('Erro aconteceu!')
+                        }
+                    ).then(listarEventos)
+                }
+            }])
+        </script>
+    </body>
+
+</html>
