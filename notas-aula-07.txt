@@ -1,0 +1,111 @@
+Angular
+
+Módulos (AppModule), Componentes (AppComponent) e Services (AppServices) - TODOS SÃO CLASSES
+
+class AppModule {}
+
+class AppComponent {}
+
+class AppService {}
+
+@ -> Decorator (algumas pessoas chamam de Anotation [Java] ou Atributo [C#] para comparar com outras linguagens)
+O Decorator é usado para especificar o comportamento do elemento em questão. Todos eles lidam com objetos e propriedades para configurarmos sua funcionalidade.
+
+@NgModule({})
+class AppModule {}
+
+@Component({})
+class AppComponent {}
+
+@Injectable({})
+class AppService {}
+
+****
+
+Módulo: é o elemento que reune os demais elementos da aplicação. Todos os elementos da aplicação devem ser registrados no módulo.
+
+@NgModule({
+    declarations: [], // aqui referenciamos todos os componentes relacionados à esse módulo
+    imports: [], // todos os módulos do projeto que usamos (por exemplo, instalado módulos) para funcionalidades são chamados aqui
+    providers: [], // chamamos os serviços (services)
+    bootstrap: [], // componente inicial
+    exports: [] // quando temos mais de 1 módulo na aplicação
+})
+class AppModule {}
+
+****
+Componente: é o elemento responsável por renderizar a view para o usuário
+
+@Component({
+    selector: 'nome-do-componente', // a tag de HTML para acessar o componente - na criação do componente, sua existencia (do componente) se dá por na prática desenvolver não só o componente mas a tag HTML que será chamada para interpretar tudo que seu componente trata
+    template | templateUrl, // quando chamamos o HTML direto (template) ou quando referenciamos uma página HTML para ser lida (templateUrl) - nunca usamos os 2, somente 1 ou outro
+    styles | styleUrls // é o CSS para aplicação no componente. Se queremos tratar o CSS direto no componente, usamos styles. Se queremos ter um arquivo para o CSS, usamos styleUrls - nunca usamos os 2, somente 1 ou outro
+})
+class AppComponent {}
+
+***
+Instalando Bootstrap no projeto:
+
+$ npm install bootstrap --save
+$ npm install bootstrap@3.3.7 --save
+
+Para usarmos o CSS do Bootstrap, no arquivo styles.scss importamos ele:
+@import "~bootstrap/scss/bootstrap.scss";
+
+***
+CRIANDO COMPONENTES
+
+Para criar componentes - de forma organizada - criamos dentro da pasta app uma pasta chamada components.
+Para cada componente, criamos uma subpasta dentro de components para cada componente criado
+
+1. Criamos pasta components
+2. Criamos subpasta do componente
+3. Criamos o arquivo .component.ts
+4. Criamos o arquivo .component.html
+5. Criamos o arquivo .component.scss
+6. Registrar (importar) o componente no AppModule
+
+Como criar um componente de forma "dinâmica" - automatizada
+
+$ ng generate component pasta/subpasta(nome do componente)
+
+****
+Property Binding
+É um tipo de Binding Unidirecional (component -> view)
+
+Usamos em uma propriedade/atributo de uma tag HTML para manipular o valor de forma dinâmica vinda do component
+
+Exemplo: <img [src]="imagem" />
+
+****
+Event Binding
+É um tipo de Binding também considerado unidirecional (view -> component)
+
+Usamos quando há uma interação do usuário, normalmente em clicks - por exemplo, para que na interação alguma coisa aconteça
+
+Exemplo: <button (click)="nomeDaFuncao()">Alterar</button>
+
+***
+Interface / OnInit
+O ngOnInit é uma propriedade (função) da Interface OnInit que funciona/é ativada quando o componente é inicializado
+Em Interfaces temos apenas DEFINIÇÕES - essas definições podem ser de variaveis/objetos/propriedades (funções)
+Colocamos no ngOnInit TUDO que queremos que aconteça quando a tela for inicializada
+
+***
+Constructor
+Ele tem o papel de ser executado quando o componente é criado.
+É uma função especial para ser processada quando o componenet é criado e então a sua tarefa se torna receber objetos através de injeção de dependências
+
+***
+Services
+
+Uma Service (um serviço) é um repositório de informações ou de configurações que é recebida/declarada no constructor, para que então, quando o componente for criado, ele esteja pronto para receber e lidar (seja de qual for a forma) com os dados e configurações vindas da service.
+Uma service NÃO INTERAGE COM O USUÁRIO.
+
+Como gerar uma service:
+
+$ ng generate service services/topicos (services é a pasta e topicos é o arquivo)
+
+Para usar a Service, importamos no componente que queremos utilizar e chamamos no constructor
+
+Exemplo: constructor(alias: nomeDoService)

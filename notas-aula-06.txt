@@ -1,0 +1,76 @@
+Para configurar o CORS (forma de exibição do webservice para o mundo 'externo'), precisamos configurar no app.js o CORS direto no arquivo. Porém antes, vamos instalar o cors no projeto de webservice na pasta 07 > apiEventos
+
+$ npm i cors --save
+
+Configuraremos no arquivo app.js do webservice os headers:
+
+> response.header("Access-Control-Allow-Origin", "*");
+> response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+A partir daqui, podemos deixar o webservice rodando para utilizarmos no projeto que criaremos na sequencia:
+$ nodemon app
+
+E então criaremos a pasta do projeto angularJS (09_conceitos_angularjs) e dentro da pasta criaremos uma estrutura de projeto para o AngularJS baseado no Express
+
+$ express appAngularJS --ejs
+$ cd appAngularJS
+$ npm i
+
+Vamos instalar algumas dependências do projeto para criarmos nossa aplicação
+
+$ npm i express-load body-parser --save
+
+Vamos configurar a rota padrão para renderizar um módulo para a view index.ejs
+
+- Se quiserem, podemos colocar o bootstrap CSS CDN para customizar nossa página pegando no link: https://getbootstrap.com/
+
+- E para integrar o AngularJS, vamos pegar na documentação do AngularJS o script para execução do mesmo no arquivo HTML: https://angularjs.org/
+
+Ambos os 2 acima colocamos no <head> do nosso arquivo index.ejs.
+
+Para a Lista de Eventos, criaremos uma table para colocar os dados vindos do webservice e para isso usaremos o método HTTP para fazer uma requisição GET
+
+** ATENÇÃO **
+
+Por utilizar chamadas callback, preste atenção ao usar o 'this' para referenciar propriedades. Se necessário, declare uma variável para manter o estado de onde quer manipular a propriedade. Exemplo:
+
+var self = this;
+self.objeto = {};
+
+Criamos a função de lista que terá um retorno de uma requisição http:
+
+return $http.get()
+
+E nessa requisição passamos a URL da requisição e o que deve ser feito em caso de sucesso e de erro.
+
+Em caso de sucesso, pegamos os dados do webservice e salvamos na nossa lista de eventos
+
+self.eventos = success.data;
+
+Para criar o laço de repetição para exibir os eventos, usaremos o ng-repeat do AngularJS para isso:
+
+<tr ng-repeat="evento in ctl.eventos">
+    <td>{{evento.descricao}}</td>
+    <td>{{evento.data}}</td>
+    <td>{{evento.preco}}</td>
+</tr>
+
+-> form
+
+Para manipular um form no AngularJS precisamos de 2 propriedades na tag de form: name e ng-submit
+A tag do ng-submit chama uma função que ao clicar no botão de submit, acionará de forma assincrona a função que é chamada no ng-submit
+
+A função criada chama o http com configuração chamando URL, método, enviando os dados e enviando o cabeçalho. Ao acionar o botão, a inserção de dados já é feita no banco de dados.
+
+****************
+Angular Atual (9 e 10)
+
+Documentação: https://angular.io/
+
+Instalando Angular CLI
+
+$ npm i @angular/cli -g
+
+Criar um projeto chamado app-conceitos. A partir de agora, usaremos um comando 'ng' e usaremos já o 'ng new' para criar o projeto
+
+$ ng new app-conceitos

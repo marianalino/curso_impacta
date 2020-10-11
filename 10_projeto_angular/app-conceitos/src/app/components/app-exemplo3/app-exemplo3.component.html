@@ -1,0 +1,16 @@
+<h3>Exemplo Event Binding</h3>
+
+<label for="escola">Nome da Escola: </label>
+<input
+  id="escola"
+  type="text"
+  [value]="escola"
+/>
+
+<button (click)="alterarTexto()">Alterar Texto</button>
+
+<ul>
+  <li *ngFor="let topico of topicos">
+    {{topico}}
+  </li>
+</ul>

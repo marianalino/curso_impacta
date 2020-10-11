@@ -1,0 +1,13 @@
+<h1>Teste de título</h1>
+<div
+  class="alert alert-success"
+  *ngIf="exibe"
+>
+  Mensagem do sistema: {{titulo}}
+</div>
+
+<ul>
+  <li *ngFor="let topico of topicosDasAulas">
+    {{topico}}
+  </li>
+</ul>
