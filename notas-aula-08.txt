@@ -1,0 +1,392 @@
+Services
+
+Uma Service (um serviço) é um repositório de informações ou de configurações que é recebida/declarada no constructor, para que então, quando o componente for criado, ele esteja pronto para receber e lidar (seja de qual for a forma) com os dados e configurações vindas da service.
+Uma service NÃO INTERAGE COM O USUÁRIO.
+
+Como gerar uma service:
+
+$ ng generate service services/topicos (services é a pasta e topicos é o arquivo)
+
+Para usar a Service, importamos no componente que queremos utilizar e chamamos no constructor
+
+Exemplo: constructor(alias: nomeDoService)
+
+Toda Service tem o seu Decorator como @Injectable, isso significa que o Angular cria ele quando temos a descrição e isso significa que ele precisa ser literalmente Injetado. O Service é usado por meio de Injeção de Dependência.
+
+Conceito de Injeção de Dependência:
+
+Vamos imaginar o seguinte
+
+class Autor {
+    nome: string
+}
+
+class Livro {
+    titulo: string;
+    autor: Autor = new Autor(); // Dependência Direta ou Explicita
+}
+
+****
+
+class Autor {
+    nome: string
+}
+
+class Livro {
+    titulo: string;
+    autor: Autor;
+
+    setAutor(Autor autor): void {
+        this.autor = autor;
+    }
+}
+
+****
+
+Toda Injeção de Dependência é feita no Construtor!
+
+-------------------------------------------------------
+
+Vamos criar um novo projeto para Eventos.
+Vamos falar de rotas, utilizarmos webservice, utilizarmos services e após finalizarmos o CRUD colocaremos nesse projeto a Service de Log.
+
+$ ng new app-eventos --routing=true --style=scss --skip-tests=true
+
+Com esse comando iniciaremos um projeto com rotas, estilo SCSS e sem arquivos de teste
+
+Vamos adicionar o ngx-bootstrap com o bootstrap para o CSS para criarmos um menu para usarmos rotas e navegarmos nas páginas
+
+$ npm i ngx-bootstrap bootstrap --save
+
+Documentação ngx-bootstrap: https://valor-software.com/ngx-bootstrap/#/documentation#getting-started
+
+Adicionamos no arquivo styles.scss o import
+
+@import "~bootstrap/scss/bootstrap.scss";
+
+Vamos criar um módulo shared para o menu (e posteriormente vocês podem criar header, footer e etc)
+
+$ ng generate module components/shared
+
+Agora vamos criar o componente de menu
+
+$ ng generate component components/shared/menu
+
+Vamos agora colocar o Módulo Shared no Imports do nosso arquivo app.module.ts
+
+import { SharedModule } from './components/shared/shared.module';
+
+imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule <- importado o módulo
+  ],
+
+Por conta da animação do menu pelo ngx-bootstrap, adicionamos também no app.module.ts:
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+imports: [
+    BrowserModule,
+    BrowserAnimationsModule, <- importado o módulo
+    AppRoutingModule,
+    SharedModule
+  ],
+
+Vamos agora colocar o conteúdo HTML do Menu no arquivo menu.component.html
+
+Após colocar o HTML precisamos configurar algumas coisas para o ngx-bootstrap funcionar e o menu funcionar na tela.
+
+Vamos abrir o shared.module.ts e nele vamos adicionar a propriedade exports para exportar o MenuComponent:
+
+exports: [MenuComponent]
+
+Para usar o ngx-bootstrap no menu, vamos aplicar ele no shared.module.ts chamando o collapse e o dropdown
+
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
+imports: [
+    CommonModule,
+    CollapseModule.forRoot(), <- módulo adicionado
+    BsDropdownModule.forRoot() <- módulo adicionado
+  ],
+
+O .forRoot() é utilizado para garantir que o carregamento do módulo que estamos usando não seja duplicado e assim não cause problemas por duplo carregamento. Sem o uso, o módulo do Angular poderá carregar mais de uma vez esse Import e causar erro no carregamento da aplicação.
+
+E para finalizarmos, vamos adicionar a variável no arquivo menu.component.ts para controlar o collapse do menu, já atribuindo o valor true para ela.
+
+isCollapsed = true;
+
+Por fim, chamaremos no app.component.html vamos adicionar o menu e vamos deixar o router-outlet:
+
+<app-menu></app-menu>
+<router-outlet></router-outlet>
+
+Agora vamos rodar a aplicação e abrir no browser
+
+$ ng serve
+
+Agora para criar as rotas, iremos criar 4 componentes para as telas:
+- Página Inicial
+- Página Home
+- Página para Lista de Eventos
+- Página para 404 (Não encontrada)
+
+Rodar os comandos dentro da pasta app-eventos:
+
+$ ng generate component components/inicio
+$ ng generate component components/home
+$ ng generate component components/not-found
+$ ng generate component components/lista-eventos
+
+Então vamos falar um pouco sobre estrutura de SCSS
+
+Os SCSS's dos componentes são de uso EXCLUSIVO do componente, para alterar somente e nada mais do que aquele componente
+O styles.scss é para usarmos CSS de terceiros (outros módulos) e chamarmos o SCSS da nossa pasta ASSETS/SCSS
+
+1. Dentro da pasta ASSETS vamos criar a pasta SCSS
+2. Dentro da pasta SCSS vamos criar o arquivo index.scss
+3. Importar o arquivo criado acima no styles.scss
+@import "./assets/scss/index"; - não precisa da extensão
+4. Vamos criar dentro da pasta ASSETS/SCSS uma pasta chamada shared
+4.1. Vamos criar dentro da pasta acima os arquivos:
+- index.scss
+- tipografia.scss
+- menu.scss
+5. Vamos criar dentro da pasta ASSETS/SCSS uma pasta chamada variables
+5.1. Vamos criar dentro da pasta acima os arquivos:
+- index.scss
+- colors.scss
+- tipografia.scss
+6. No arquivo index.scss da pasta variables vamos fazer os imports:
+
+@import "./colors";
+@import "./tipografia";
+
+7. No arquivo index.scss da pasta shared vamos fazer os imports:
+
+@import "./menu";
+@import "./tipografia";
+
+8. No arquivo index.scss da pasta ASSETS/SCSS vamos colocar os imports:
+
+@import "./shared/index";
+
+9. Colocar o import de variáveis em cada um dos arquivos SCSS da pasta shared
+
+@import "../variables/index";
+
+10. Vamos importar em variables/tipografia de uma fonte do google:
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+
+11. Criamos na pasta SCSS o arquivo general.scss para colocar configurações padrões para a aplicação
+
+@import "./variables/index";
+
+*,
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+}
+
+12. Adicionamos o general no arquivo index.scss da pasta SCSS
+
+@import "general"; <- colocamos primeiro pois ele deve ser carregado primeiro. Funciona em ordem de leitura
+@import "./shared/index";
+
+13. No arquivo SHARED/TIPOGRAFIA, camos configurar a cor padrão para título e colocaremos que links sempre terão mão de click:
+
+@import "../variables/index";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $title-color;
+}
+
+a{
+    cursor: pointer;
+}
+
+14. Criar a variável de cor para título no arquivo variables/colors.scss
+
+$title-color: #5a047c;
+
+Documentação SCSS/SASS: https://sass-lang.com/documentation
+
+Voltando aos arquivos de HTML e rotas. Vamos no app.component.html e colocaremos o router-outlet dentro de uma section
+
+<section class="containet m-5">
+    <router-outlet></router-outlet>
+</section>
+
+O router-outlet funciona com a rota para fazer carregamento do conteúdo do componente solicitado via rota dentro dele.
+
+Vamos abrir os arquivos de HTML de not-found, home, inicio e lista-eventos, e colocaremos uma mensagem em uma tag de H1 para cada página (fica a critério de cada um como e o que colocar)
+
+Agora vamos configurar as rotas para testarmos as páginas.
+
+No arquivo de menu.component.html vamos modificar os href's para a forma que usamos no Angular: routerLink
+
+-> [routerLink]="['/']"
+
+Caso queiramos rotas, basta colocar /nome-da-rota
+
+Exemplo:
+[routerLink]="['/home']"
+[routerLink]="['/lista-eventos']"
+
+Vamos no shared.module.ts e vamos adicionar o RouterModule como import
+
+import { RouterModule } from '@angular/router';
+imports: [
+    CommonModule,
+    RouterModule, <- módulo adicionado
+    CollapseModule.forRoot(),
+    BsDropdownModule.forRoot()
+  ],
+
+Por fim vamos no app-routing.module.ts para configurar as rotas
+As rotas são configuradas na const routes, essa constante é uma lista de objetos, e cada objeto representa uma página. Cada objeto tem que ter PELO MENOS 2 propriedades.
+
+const routes: Routes = [
+  {
+    path: "",
+    component: InicioComponent
+  },
+  {
+    path: "home",
+    component: HomeComponent
+  },
+  {
+    path: 'lista-eventos',
+    component: ListaEventosComponent
+  },
+  {
+    path: "**",
+    component: NotFoundComponent
+  }
+];
+
+Sempre a primeira rota é a rota sem nenhum caminho, para a página INICIAL;
+Na sequencia, vem as demais rotas do sistema;
+E SEMPRE POR ÚLTIMO vem a configuração para rota 'não encontrada', que é quando o usuário digita alguma rota que não existe.
+
+Pode ser que seja necessário parar de rodar o projeto e rodar novamente com o comando $ ng serve pois a rota pode bugar
+
+No arquivo lista-eventos.component.html vamos criar a estrutura da tabela para receber as informações
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Descrição</th>
+            <th>Data</th>
+            <th>Preço</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Exemplo</td>
+            <td>xx/xx/xxxx</td>
+            <td>R$ 10</td>
+        </tr>
+    </tbody>
+</table>
+
+Para chamarmos o webservice, precisaremos acessar os arquivos da pasta 07_webservice_express/apiEventos e rodar o comando para executar o webservice - NECESSÁRIO ESTAR RODANDO O ANGULAR também
+
+$ node app
+
+Para integrar o webservice, criaremos uma service que fará a configuração das chamadas para retorno de informações ou envio de informações
+
+$ ng generate service services/webservice
+
+Para usarmos um webservice, utilizamos algo muito similar as promisses que usamos no Node, que no Angular se chama Observable.
+
+Para acessar, temos de seguir uns passos:
+
+0. Precisamos definir uma estrutura para os dados e então utilizaremos uma INTERFACE para representar o objeto de Evento com suas propriedades e tipos
+
+$ ng generate interface interfaces/evento
+
+1. Adicionar um módulo HttpClientModule no arquivo app.module.ts
+
+import { HttpClientModule } from "@angular/common/http";
+
+imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    SharedModule,
+    HttpClientModule <- módulo adicionado
+  ],
+
+2. No construtor do service (webservice.service.ts) referenciar o component HttpClient
+
+import { HttpClient } from '@angular/common/http';
+
+constructor(private http: HttpClient) { }
+
+Utilizamos o private na frente do alias para possibilitar o uso dele (service) no nosso componente fora do constructor. Sem o private ele só pode ser acessado dentro do constructor.
+
+Vamos chamar a Interface de Evento e o Observable para criar a chamada
+
+import { Observable } from 'rxjs';
+import { Evento } from './../interfaces/evento';
+
+public getEventos(): Observable<Evento[]> {
+    return this.http.get<Evento[]>(this.url + "eventos");
+  }
+
+Agora vaos no lista-eventos.component.ts e criamos uma variável para eventos que espera uma lista de Objetos do tipo Evento
+
+import { Evento } from './../../interfaces/evento';
+
+eventos: Evento[];
+
+Agora chamamos o nosso service no arquivo e colocamos no constructor
+
+import { WebserviceService } from 'src/app/services/webservice.service';
+
+constructor(private webservice: WebserviceService) { }
+
+E por fim usamos o webservice para acessar a funão e capturar o retorno do Observable
+
+this.webservice.getEventos()
+    .subscribe(resposta => this.eventos = resposta);
+
+Após obter o retorno da resposta, já temos o conteudo em this.eventos. Agora vamos no HTML modificar a TR do TBODY para exibir os dados
+
+    <tr *ngFor="let evento of eventos">
+        <td>{{evento.descricao}}</td>
+        <td>{{evento.data | date: 'dd/MM/yyyy'}}</td>
+        <td>{{evento.preco | currency: 'R$'}}</td>
+    </tr>
+
+E agora iremos criar o componente de inserir-evento e configurar a rota
+
+$ ng generate component components/inserir-evento
+
+Criamos a configuração da rota no app-routing.module.ts:
+
+  {
+    path: 'inserir-evento',
+    component: InserirEventoComponent
+  },
+
+E colocamos o routerLink para a página no menu.component.html
+
+[routerLink]="['/inserir-evento']"
+
+Para um retorno visual, vamos alterar o inserir-evento.component.html para trazer um retorno de H1 com 'Inserir Evento'
+
+<h1>Inserir Evento</h1>
