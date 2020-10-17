@@ -1,0 +1,90 @@
+Filtros e Pipes
+
+São elementos que transformam o resultado apresentado para o usuário.
+
+Documentação ng generate: https://angular.io/cli/generate
+
+Uso: ng generate pipe pasta/nomeDoFiltro
+
+O appModule é atualizado para poder disponibilizar o pipe em toda a aplicação.
+
+Exemplo Pipe Uppercase:
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'uppercase'
+})
+export class UppercasePipe implements PipeTransform {
+
+  transform(value: string): string {
+    return value.toUppercase;
+  }
+
+}
+
+Vamos gerar nossa pipe de email
+
+$ ng generate pipe pipes/email
+
+transform(value: string, dominio: string, extensao: string): string {
+    if (dominio === undefined) { <- tratativa necessária para não exibir undefined na tela
+        dominio = 'teste';
+    }
+    if (extensao === undefined) { <- tratativa necessária para não exibir undefined na tela
+        extensao = '.org';
+    }
+    return value + '@' + dominio + extensao;
+}
+
+******************
+
+Diretiva
+
+Estrutural: altera a estrutura do componente (DOM), podendo inserir, remover, ocultar....
+
+Uso: inicia com *
+Exemplo: *ngIf, *ngFor
+
+De Propriedade/De Atributo: incluir novos comportamentos
+
+Criando uma diretiva:
+
+$ ng generate directive diretivas/ng-else
+
+Na diretiva estrutural, temos 2 imports que são necessários:
+
+TemplateRef - é o conteúdo interno do container - conteudo a ser manipulado pela diretiva
+ViewContainerRef - é a DIV externa que usamos na condição da diretiva - elemento que executa a diretiva
+
+**********************
+
+Rodar na máquina o sistema
+
+$ ng serve <- roda o ambiente formado desenvolvimento, sem tratamentos
+
+$ ng serve --configuration=production <- forma completa de escrita para rodar configuração de produção
+
+$ ng serve -c production <- forma reduzida de escrita para rodar configuração de produção
+
+https://angular.io/cli/build
+
+Build gera arquivos finais para servidor
+
+$ ng build <- build somente de arquivos como configuração local - NÃO INDICADO PARA SERVIDORES
+
+$ ng build -c production <- build para servidor final, com arquivo otimizados, diminuidos e lendo pelo comando -c (configuração) o arquivo environment indicado
+
+**************
+
+Teste Automatizado: Cypress
+
+https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell
+
+Instalação:
+
+$ npm install cypress --save-dev
+
+Para rodar:
+
+$ npx cypress open

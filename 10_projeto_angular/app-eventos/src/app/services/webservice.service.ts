@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { Evento } from './../interfaces/evento';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebserviceService {
-  url: string = "http://localhost:3200/";
+  url: string = environment.webservice;
 
   constructor(private http: HttpClient) { }
 
@@ -18,25 +19,25 @@ export class WebserviceService {
   // a requisição esperada é esperado, como no Observable, uma lista de eventos do tipo do OBjeto Evento
   // e por fim, passamos a URL da requisição para trazer um retorno
   public getEventos(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(this.url + "eventos");
+    return this.http.get<Evento[]>(this.url);
   }
 
   public getEvento(id: string): Observable<Evento> {
-    const url = `${this.url}eventos/${id}`;
+    const url = `${this.url}/${id}`;
     return this.http.get<Evento>(url);
   }
 
   public postEvento(evento: Evento): Observable<Evento> {
-    return this.http.post<Evento>(this.url + "eventos", evento);
+    return this.http.post<Evento>(this.url, evento);
   }
 
   public putEvento(evento: Evento): Observable<Evento> {
-    const url = `${this.url}eventos/${evento._id}`;
+    const url = `${this.url}/${evento._id}`;
     return this.http.put<Evento>(url, evento);
   }
 
   public deleteEvento(id: string): Observable<Evento> {
-    const url = `${this.url}eventos/${id}`;
+    const url = `${this.url}/${id}`;
     return this.http.delete<Evento>(url);
   }
 }

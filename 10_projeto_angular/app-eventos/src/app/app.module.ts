@@ -14,6 +14,10 @@ import { SharedModule } from './components/shared/shared.module';
 import { VerEventoComponent } from './components/ver-evento/ver-evento.component';
 import { EditarEventoComponent } from './components/editar-evento/editar-evento.component';
 import { RemoverEventoComponent } from './components/remover-evento/remover-evento.component';
+import { EmailPipe } from './pipes/email.pipe';
+import { SubListaPipe } from './pipes/sub-lista.pipe';
+import { NgElseDirective } from './diretivas/ng-else.directive';
+import { DestaqueDirective } from './diretivas/destaque.directive';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { RemoverEventoComponent } from './components/remover-evento/remover-even
     InserirEventoComponent,
     VerEventoComponent,
     EditarEventoComponent,
-    RemoverEventoComponent
+    RemoverEventoComponent,
+    EmailPipe,
+    SubListaPipe,
+    NgElseDirective,
+    DestaqueDirective
   ],
   imports: [
     BrowserModule,

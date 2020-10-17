@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  webservice: 'http://localhost:3200/eventos',
   featureFlag: {
     showLog: true,
     showDelete: true

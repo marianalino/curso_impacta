@@ -1,5 +1,34 @@
 <h1>Lista de Eventos</h1>
 
+<div *ngIf="eventos.length < 8">
+    <div class="alert alert-danger">
+        Você possui apenas {{ eventos.length }} eventos!
+    </div>
+</div>
+
+<div *ngElse="eventos.length < 8">
+    <div class="alert alert-info">
+        Você possui apenas {{ eventos.length }} eventos!
+    </div>
+</div>
+
+<div class="form-group row">
+    <label
+        for="descricao"
+        class="control-label col-md-3"
+    >
+        Informe partes da descrição:
+    </label>
+    <input
+        type="text"
+        id="descricao"
+        name="descricao"
+        class="form-control col-md-9"
+        #busca
+        (keyup)="0"
+    >
+</div>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -10,8 +39,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let evento of eventos">
-            <td>{{evento.descricao}}</td>
+        <tr
+            *ngFor="let evento of eventos | subLista:busca.value"
+            appDestaque
+        >
+            <td>{{evento.descricao | uppercase }}</td>
             <td>{{evento.data | date: 'dd/MM/yyyy'}}</td>
             <td>{{evento.preco | currency: 'R$'}}</td>
             <td>
