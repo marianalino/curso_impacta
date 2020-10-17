@@ -11,7 +11,6 @@
             </label>
             <input
                 type="text"
-                [(ngModel)]="evento.descricao"
                 id="descricao"
                 name="descricao"
                 class="form-control col-md-10"
@@ -26,7 +25,6 @@
             </label>
             <input
                 type="date"
-                [(ngModel)]="evento.data"
                 id="data"
                 name="data"
                 class="form-control col-md-4"
@@ -39,7 +37,6 @@
             </label>
             <input
                 type="text"
-                [(ngModel)]="evento.preco"
                 id="preco"
                 name="preco"
                 class="form-control col-md-4"
@@ -47,18 +44,32 @@
         </div>
         <div class="form-group row justify-content-md-center">
             <div class="col-md-1">
-                <button
-                    (click)="incluir(evento)"
-                    class="btn btn-primary"
-                >Incluir</button>
+                <button class="btn btn-primary">Incluir</button>
             </div>
             <div class="col-md-1">
-                <button
-                    (click)="cancelar()"
-                    class="btn btn-secondary"
-                >Cancelar</button>
+                <button class="btn btn-secondary">Cancelar</button>
             </div>
         </div>
     </fieldset>
 
 </form>
+
+
+****
+
+form {
+    fieldset {
+        div {
+            margin-bottom: 30px;
+            label {
+                text-align: right;
+                align-self: center;
+                padding-right: 10px;
+                font-size: 20px;
+            }
+            input {
+                height: 35px;
+            }
+        }
+    }
+}

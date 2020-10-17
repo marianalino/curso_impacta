@@ -111,7 +111,8 @@ app.delete('/eventos/:id', function(request, response) {
         if (erro) {
           response.json(erro);
         } else {
-          response.send("Evento " + descricao + " removido");
+          response.json(eventoApagado);
+          // response.send("Evento " + descricao + " removido");
         }
       });
     }

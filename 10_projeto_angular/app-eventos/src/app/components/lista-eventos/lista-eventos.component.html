@@ -6,6 +6,7 @@
             <th>Descrição</th>
             <th>Data</th>
             <th>Preço</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -13,6 +14,21 @@
             <td>{{evento.descricao}}</td>
             <td>{{evento.data | date: 'dd/MM/yyyy'}}</td>
             <td>{{evento.preco | currency: 'R$'}}</td>
+            <td>
+                <a
+                    [routerLink]="['/eventos/ver/'+evento._id]"
+                    class="btn btn-info"
+                >Ver</a>
+                <a
+                    [routerLink]="['/eventos/editar/'+evento._id]"
+                    class="btn btn-warning"
+                >Editar</a>
+                <a
+                    *ngIf="showDelete"
+                    [routerLink]="['/eventos/remover/'+evento._id]"
+                    class="btn btn-danger"
+                >Apagar</a>
+            </td>
         </tr>
     </tbody>
 </table>

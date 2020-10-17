@@ -1,3 +1,7 @@
 export const environment = {
-  production: true
+  production: true,
+  featureFlag: {
+    showLog: false,
+    showDelete: true
+  }
 };

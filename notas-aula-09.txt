@@ -1,0 +1,21 @@
+Vínculos Uni-direcionais
+Property Binding  -> do componente para o HTML
+
+[propriedade]
+
+Event Binding-> do HTML para o componente
+
+(evento)
+
+Vínculo Bi-direcional
+
+[(ngModel)]
+
+***
+
+A data para o input do tipo date espera um formato - formato universal: 'yyyy-mm-dd'
+
+***
+
+Feature Flag é um "tipo de variável" que é criado para controlar situações em ambientes de desenvolvimento, teste e produção
+Também é utilizado para habilitar ou desabilitar funções na tela

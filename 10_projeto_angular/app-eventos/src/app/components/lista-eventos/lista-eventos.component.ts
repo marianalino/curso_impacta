@@ -1,6 +1,7 @@
-
 import { Component, OnInit } from '@angular/core';
+import { LogService } from 'src/app/services/log.service';
 import { WebserviceService } from 'src/app/services/webservice.service';
+import { environment } from '../../../environments/environment';
 import { Evento } from './../../interfaces/evento';
 
 @Component({
@@ -10,8 +11,12 @@ import { Evento } from './../../interfaces/evento';
 })
 export class ListaEventosComponent implements OnInit {
   eventos: Evento[];
+  showDelete = environment.featureFlag.showDelete;
 
-  constructor(private webservice: WebserviceService) { }
+  constructor(
+    private webservice: WebserviceService,
+    private log: LogService
+  ) { }
 
   ngOnInit(): void {
     // Acessamos nosso service com o this.webservice e chamamos a função .getEventos()
@@ -19,8 +24,13 @@ export class ListaEventosComponent implements OnInit {
     // Usamos o subscribe para capturar esse retorno, que é nossa resposta
     // Usamos dentro do subscribe uma arrow function aonde atribuimos resposta a nossa variavel criada anteriormente
     // this.eventos = resposta
-    this.webservice.getEventos()
-      .subscribe(resposta => this.eventos = resposta);
+    this.webservice.getEventos().subscribe(resposta => {
+      this.eventos = resposta;
+      this.log.show('info', resposta, this.eventos);
+      // this.log.show('error', resposta, this.eventos);
+      this.log.show('warning', resposta, this.eventos);
+      this.log.show('log', "Meu log", resposta);
+    });
   }
 
 }

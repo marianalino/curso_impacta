@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EditarEventoComponent } from './components/editar-evento/editar-evento.component';
 import { HomeComponent } from './components/home/home.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { InserirEventoComponent } from './components/inserir-evento/inserir-evento.component';
 import { ListaEventosComponent } from './components/lista-eventos/lista-eventos.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RemoverEventoComponent } from './components/remover-evento/remover-evento.component';
+import { VerEventoComponent } from './components/ver-evento/ver-evento.component';
 
 const routes: Routes = [
   {
@@ -16,12 +19,24 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'lista-eventos',
+    path: 'eventos',
     component: ListaEventosComponent
   },
   {
-    path: 'inserir-evento',
+    path: 'eventos/novo',
     component: InserirEventoComponent
+  },
+  {
+    path: 'eventos/ver/:id',
+    component: VerEventoComponent
+  },
+  {
+    path: 'eventos/editar/:id',
+    component: EditarEventoComponent
+  },
+  {
+    path: 'eventos/remover/:id',
+    component: RemoverEventoComponent
   },
   {
     path: "**",
